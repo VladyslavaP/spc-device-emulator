@@ -1,0 +1,9 @@
+module.exports = {
+	DB_CONN_STR: '',
+	deviceBase: {
+		MAX_WATER_AMOUNT: 1000,
+		WATER_CONSUMPTION: 100,
+		MAX_FOOD_AMOUNT: 1000,
+		MAX_SPRAYER_AMOUNT: 100,
+	}
+}

@@ -1,0 +1,10 @@
+{
+  "name": "shc-device-emulator",
+  "main": "app.js",
+  "dependencies": {
+  	"mongoose" : "latest",
+  	"express" : "latest",
+  	"request" : "latest",
+  	"lodash": "latest"
+  }
+}
