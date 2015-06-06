@@ -1,31 +1,22 @@
 var random = require('../utils/random.util.js');
+var env = require('../env.js');
+
+var AWS = require('aws-sdk');
+AWS.config.loadFromPath('./aws-config.json');
+var bucket = new AWS.S3({ params: { Bucket: 'spc-media'}});
+var env = require('../env.js');
 
 module.exports = function(model) {
-	this.directoryPath = '/photos/' + this.model._id.toString();
-	this.photos = [];
 
-	this.init = function() {
-		this.setupDirectory();
-		this.scanDirectory();
-	};
-
-	this.setupDirectory = function() {
-		if (!fs.existsSync(this.directoryPath)) {
-			fs.mkdir(this.directoryPath);
-		}
-	};
-
-	this.scanDirectory = function() {
-		fs.readdir(this.directoryPath, function(err, files) {
-			this.photos = files;
-		});
-	};
-
-	this.getRandomPhoto = function() {
-		if (this.photos.length === 0) {
-			return undefined;
-		}
-		var randomIndex = random.randomInRange(0, this.photos.length);
-		return this.photos[randomIndex];
+	this.getRandomPhoto = function(callback) {
+		bucket.listObjects(
+			{ Bucket: 'spc-media'},
+			function(err, data) {
+				if (err) { callback() };
+				var randomIndex = random.randomInRange(0, data.Contents.length);
+				var url = env.s3.bucketUrl + data.Contents[randomIndex].Key;
+				callback(url);
+  			}
+  		);
 	};
 }

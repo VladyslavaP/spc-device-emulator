@@ -8,10 +8,24 @@ module.exports = function(models) {
 
 	var self = this;
 
-	this.init = function() {
+	this.callbacks = [];
+
+	this.on = function(key, callback) {
+		this.callbacks[key] = callback;
+	};
+
+	this.emit = function(key, params) {
+		if (this.callbacks[key]) {
+			this.callbacks[key](params);
+		}
+	}
+
+	this.init = function(callback) {
 		_.forEach(this.models, function(model) {
+			console.log(model);
 			self.devices.push(new DeviceBase(model));
 		});
+		callback();
 	}
 
 	this.lowerDate = new Date();
@@ -22,7 +36,7 @@ module.exports = function(models) {
 	this.setDates = function(lowerDateString, upperDateString) {
 		this.lowerDate = new Date(lowerDateString);
 		this.upperDate = new Date(upperDateString);
-	}
+	};
 
 	this.doWork = function() {
 		_.forEach(this.devices, function(device) {
@@ -31,8 +45,8 @@ module.exports = function(models) {
 				n.time = random.randomTimeInRange(this.lowerDate, this.upperDate);
 				return n;
 			});
-			message.sendNotifications(notifications);
-			message.updateModel(device.model);
+			self.emit('notify', notifications);
+			self.emit('update', device.model);
 		})
-	}
+	};
 }

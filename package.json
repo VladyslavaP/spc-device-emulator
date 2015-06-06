@@ -5,6 +5,7 @@
   	"mongoose" : "latest",
   	"express" : "latest",
   	"request" : "latest",
-  	"lodash": "latest"
+  	"lodash": "latest",
+  	"aws-sdk": "latest"
   }
 }
