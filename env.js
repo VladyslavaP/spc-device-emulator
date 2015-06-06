@@ -6,11 +6,9 @@ module.exports = {
 		MAX_FOOD_AMOUNT: 1000,
 		MAX_SPRAYER_AMOUNT: 100,
 	},
-	photosDirectory: '/media/',
 	api: {
 		getDevicesUrl: 'http://127.0.0.1:9000/api/devices',
 		postNotificationUrl: 'http://127.0.0.1:9000/api/notifications/',
-		postPhoto: ''
 	},
 	s3: {
 		bucketUrl: 'https://spc-media.s3.eu-central-1.amazonaws.com/'
