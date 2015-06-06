@@ -12,5 +12,10 @@ module.exports = {
 	},
 	s3: {
 		bucketUrl: 'https://spc-media.s3.eu-central-1.amazonaws.com/'
+	},
+	messages: {
+		waterShortage: 'Please refill water container.',
+		foodShortage: 'Please refill food container.',
+		sprayingMaterialShortage: 'Please refill spraying material container.'
 	}
 }
