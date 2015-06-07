@@ -14,4 +14,15 @@ exports.postNotifications = function(notifications) {
 			form: notification
 		});
 	});
+};
+
+exports.updateDevice = function(model) {
+	request({
+		method: 'POST',
+		url: env.api.updateDeviceUrl,
+		data: model
+	})
+	.success(function() {
+		console.log('updated ' + model.name);
+	});
 }

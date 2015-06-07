@@ -9,6 +9,7 @@ module.exports = {
 	api: {
 		getDevicesUrl: 'http://127.0.0.1:9000/api/devices',
 		postNotificationUrl: 'http://127.0.0.1:9000/api/notifications/',
+		updateDeviceUrl: 'http://127.0.0.1:9000/api/devices/update/'
 	},
 	s3: {
 		bucketUrl: 'https://spc-media.s3.eu-central-1.amazonaws.com/'
