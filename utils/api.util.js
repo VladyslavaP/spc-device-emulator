@@ -17,12 +17,17 @@ exports.postNotifications = function(notifications) {
 };
 
 exports.updateDevice = function(model) {
-	request({
-		method: 'POST',
+	console.log(model);
+	request.post({
 		url: env.api.updateDeviceUrl,
-		data: model
+		form: model
 	})
-	.success(function() {
-		console.log('updated ' + model.name);
+	.on('response', function(res) {
+		if(res.statusCode !== 200) {
+			console.log('gg wp');
+			console.log(res.body);
+		} else {
+			console.log('updated ' + model.name);
+		}
 	});
 }

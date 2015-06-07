@@ -22,7 +22,6 @@ module.exports = function(models) {
 
 	this.init = function(callback) {
 		_.forEach(this.models, function(model) {
-			console.log(model);
 			self.devices.push(new DeviceBase(model));
 		});
 		callback();
@@ -46,6 +45,7 @@ module.exports = function(models) {
 				return n;
 			});
 			self.emit('notify', notifications);
+			console.log(device.model);
 			self.emit('update', device.model);
 		})
 	};

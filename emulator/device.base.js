@@ -41,8 +41,6 @@ module.exports = function(deviceModel) {
 
 	this.generate = function() {
 		var notifications = [];
-		console.log(self.model.config);
-		console.log(self.model);
 		_.forEach(alterations, function(alter, module) {
 			if (self.model.config[module] === undefined) { return; }
 			var notification = alter(self.model.config[module]);
