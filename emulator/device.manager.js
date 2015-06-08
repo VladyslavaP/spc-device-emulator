@@ -21,10 +21,6 @@ module.exports = function(models) {
 	}
 
 	this.init = function(callback) {
-		_.forEach(this.models, function(model) {
-			console.log(model);
-			self.devices.push(new DeviceBase(model));
-		});
 		callback();
 	}
 
@@ -39,14 +35,10 @@ module.exports = function(models) {
 	};
 
 	this.doWork = function() {
-		_.forEach(this.devices, function(device) {
-			var notifications = device.generate();
-			notifications = _.map(notifications, function(n) {
-				n.time = random.randomTimeInRange(this.lowerDate, this.upperDate);
-				return n;
-			});
+		_.forEach(this.models, function(model) {
+			var notifications = DeviceBase.generate(model, { lowerDate: self.lowerDate, upperDate: self.upperDate });
 			self.emit('notify', notifications);
-			self.emit('update', device.model);
+			self.emit('update', model);
 		})
 	};
 }

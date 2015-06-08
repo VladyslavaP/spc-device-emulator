@@ -12,17 +12,24 @@ exports.postNotifications = function(notifications) {
 		request.post({
 			url: env.api.postNotificationUrl,
 			form: notification
-		});
+		}).on('response', function() {
+			console.log('posted notification for ' + notification.deviceId);
+		})
 	});
 };
 
 exports.updateDevice = function(model) {
-	request({
-		method: 'POST',
+	console.log('updateDevice');
+	console.log(model);
+	request.post({
 		url: env.api.updateDeviceUrl,
-		data: model
+		form: { obj: JSON.stringify(model) }
 	})
-	.success(function() {
-		console.log('updated ' + model.name);
+	.on('response', function(res) {
+		if (res.statusCode !== 200) {
+			console.log('I am fucked');
+		} else {
+			console.log('updated ' + model.name);
+		}
 	});
 }

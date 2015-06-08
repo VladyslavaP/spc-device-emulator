@@ -11,8 +11,8 @@ emulator.init(function() {
 });
 
 router.get('/emulate', function(req, res) {
-	var lowerDate = req.params.lowerDate;
-	var upperDate = req.params.upperDate;
+	var lowerDate = req.query.lowerDate;
+	var upperDate = req.query.upperDate;
 	emulator.run(lowerDate, upperDate);
 	return res.sendStatus(200);
 })
