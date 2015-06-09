@@ -20,10 +20,6 @@ module.exports = function(models) {
 		}
 	}
 
-	this.init = function(callback) {
-		callback();
-	}
-
 	this.lowerDate = new Date();
 	this.lowerDate.setHours(0);
 	this.upperDate = new Date();
@@ -36,9 +32,13 @@ module.exports = function(models) {
 
 	this.doWork = function() {
 		_.forEach(this.models, function(model) {
-			var notifications = DeviceBase.generate(model, { lowerDate: self.lowerDate, upperDate: self.upperDate });
-			self.emit('notify', notifications);
+			var generated = DeviceBase.generate(
+				model,
+				{ lowerDate: self.lowerDate, upperDate: self.upperDate }
+			);
+			self.emit('notify', generated.notifications);
+			self.emit('stats', generated.stats);
 			self.emit('update', model);
-		})
+		});
 	};
 }

@@ -15,13 +15,13 @@ router.get('/emulate', function(req, res) {
 	var upperDate = req.query.upperDate;
 	emulator.run(lowerDate, upperDate);
 	return res.sendStatus(200);
-})
+});
 
 router.get('/photo', function(req, res) {
 	emulator.getPhoto(function(url) {
 		return res.json(200, { url: url });
 	});
-})
+});
 
 var app = express();
 app.use('/', router);
