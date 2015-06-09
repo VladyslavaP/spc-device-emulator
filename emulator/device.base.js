@@ -7,7 +7,7 @@ var cycle = function(initialValue, maxValue, consumption, offset, threshold, cyc
 	var consumedPerCycle = [];
 
 	for (var i = 0; i < cycles; i++) {
-		if (initialValue <= threshold && initialValue > 0) {
+		if (initialValue <= threshold) {
 			activeCycles.push(i);
 			initialValue = maxValue;
 		} else {
