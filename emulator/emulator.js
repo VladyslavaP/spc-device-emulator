@@ -1,5 +1,4 @@
 var api = require('../utils/api.util.js');
-var DeviceMedia = require('./device.media.js');
 var DeviceManager = require('./device.manager.js');
 var _ = require('lodash');
 
@@ -25,13 +24,5 @@ module.exports = function() {
 		}
 		self.manager.setDates(lowerDateString, upperDateString);
 		this.manager.doWork();
-	};
-
-	this.media = new DeviceMedia();
-
-	this.getPhoto = function(callback) {
-  	this.media.getRandomPhoto(function(url) {
-			callback(url);
-		});
 	};
 };
